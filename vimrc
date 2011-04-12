@@ -143,7 +143,7 @@ nmap <F1> <Esc>
 imap <C-F> <C-R>=expand("%")<CR>
 
 " Maps autocomplete to tab
-imap <Tab> <C-N>
+imap <S-Tab> <C-N>
 
 imap <C-L> <Space>=><Space>
 
