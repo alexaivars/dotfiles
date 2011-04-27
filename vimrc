@@ -211,9 +211,3 @@ let g:fuf_splitPathMatching=1
 " endfunction
 " map <Leader>w :call OpenURL()<CR>
 "
-
-" Set a few gui options for macvim
-set guioptions-=r
-" set noantialias
-set guifont=Monaco:h10
-
