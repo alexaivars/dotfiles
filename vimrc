@@ -64,7 +64,6 @@ if has("autocmd")
   autocmd BufWritePost .vimrc source $MYVIMRC
 
   augroup END
-
 else
 
   set autoindent		" always set autoindenting on
@@ -109,6 +108,13 @@ map <Leader>sc :RScontroller
 map <Leader>sv :RSview 
 map <Leader>su :RSunittest 
 map <Leader>sf :RSfunctionaltest 
+
+"Shortcut to rapidly toggle `set list`
+map <leader>l :set list!<CR>
+
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+
 
 " Hide search highlighting
 map <Leader>h :set invhls <CR>
@@ -193,15 +199,21 @@ set tags=./tags;
 let g:fuf_splitPathMatching=1
 
 " Open URL
-command -bar -nargs=1 OpenURL :!open <args>
-function! OpenURL()
-  let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;:]*')
-  echo s:uri
-  if s:uri != ""
-	  exec "!open \"" . s:uri . "\""
-  else
-	  echo "No URI found in line."
-  endif
-endfunction
-map <Leader>w :call OpenURL()<CR>
+" command -bar -nargs=1 OpenURL :!open <args>
+" function! OpenURL()
+"   let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;:]*')
+"   echo s:uri
+"   if s:uri != ""
+" 	  exec "!open \"" . s:uri . "\""
+"   else
+" 	  echo "No URI found in line."
+"   endif
+" endfunction
+" map <Leader>w :call OpenURL()<CR>
+"
+
+" Set a few gui options for macvim
+set guioptions-=r
+" set noantialias
+set guifont=Monaco:h10
 
