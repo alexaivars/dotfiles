@@ -6,3 +6,5 @@ set lines=55 columns=80
 colorscheme railscasts
 
 set guifont=Monaco:h10
+
+
