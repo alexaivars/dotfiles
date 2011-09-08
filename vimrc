@@ -211,4 +211,4 @@ let g:fuf_splitPathMatching=1
 " endfunction
 " map <Leader>w :call OpenURL()<CR>
 
-set clipboard=unnamed"
+" set clipboard=unnamed
