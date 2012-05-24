@@ -31,7 +31,7 @@ alias rst='touch tmp/restart.txt'
 
 # misc
 alias mm='mvim'
-alias ssh-weekday='ssh ec2-user@ec2-46-51-140-118.eu-west-1.compute.amazonaws.com'
+alias ssh-weekday='ssh -v ec2-user@ec2-176-34-65-179.eu-west-1.compute.amazonaws.com -i ~/.ssh/weekday_dev.pem'
 alias port='port -v'
 
 # commands starting with % for pasting from web

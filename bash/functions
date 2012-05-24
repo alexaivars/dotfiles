@@ -1,0 +1,46 @@
+
+# SVTi bash helpers
+# http://svtiwiki/display/TEK/Tips+-+Bash+och+SSH
+
+
+# historylist
+function h () {
+  if [ $1 ]; then
+    # 2nd grep is to retain coloring
+    history | grep -i $1 | tail -250 | grep -i $1
+  else
+    history | tail -250
+  fi
+}
+
+
+# processlist
+function psa () {
+  if [ $1 ]; then
+    ps -ef | grep -v grep | grep -i $1
+  else
+    ps -ef
+  fi
+}
+
+
+# proxy on; proxy off
+function proxy () {
+  if [ $1 == "on" ]; then
+    export http_proxy=http://proxy.svt.se:8080
+    export https_proxy=https://proxy.svt.se:8080
+    export no_proxy='*svt.se, *.local, ecedemo, ecedemo5, localhost, svtiwiki, legolas'
+		export GIT_SSH='svt-git-ssh'
+		echo "set http_proxy, https_proxy and no_proxy GIT_SSH variables."
+  else
+    unset http_proxy
+    unset https_proxy
+    unset no_proxy
+		unset GIT_SSH
+		echo "unset http_proxy, https_proxy and no_proxy GIT_SSH variables."
+  fi
+}
+
+if [ -f /opt/local/etc/bash_completion ]; then
+    . /opt/local/etc/bash_completion
+fi

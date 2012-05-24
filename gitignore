@@ -4,3 +4,6 @@
 *.swp
 *.pyc
 *.sass-cache
+*.jhw-cache
+*.tmp
+.livereload
