@@ -1,6 +1,11 @@
 export PS1="\u@\h \w: "
 export EDITOR="vim"
 
+# IRC
+export IRCNICK="spuff"
+export IRCNAME="413X"
+export IRCUSER="alex"
+
 # export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="sv_SE.UTF-8"
 
