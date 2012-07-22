@@ -57,8 +57,8 @@ set autoindent
 set cursorline
 set modelines=0
 set ttyfast
-" set relativenumber
-if v:version >= 730 && has("autocmd")
+" set relativenumber if we are using a newer vim
+if v:version >= 703 && has("autocmd")
 	autocmd BufEnter * set relativenumber
 endif 
 
