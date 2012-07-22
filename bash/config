@@ -1,25 +1,5 @@
 export PS1="\u@\h \w: "
 export EDITOR="vim"
-<<<<<<< HEAD
-export LC_ALL=""
-export LC_CTYPE="sv_SE.UTF-8"
-# export LANG="en_US.utf8"
-# LC_NUMERIC="sv_SE.UTF-8"
-# LC_TIME="sv_SE.UTF-8"
-# LC_COLLATE="sv_SE.UTF-8"
-# LC_MONETARY="sv_SE.UTF-8"
-# LC_MESSAGES="sv_SE.UTF-8"
-# LC_PAPER="sv_SE.UTF-8"
-# LC_NAME="sv_SE.UTF-8"
-# LC_ADDRESS="sv_SE.UTF-8"
-# LC_TELEPHONE="sv_SE.UTF-8"
-# LC_MEASUREMENT="sv_SE.UTF-8"
-# LC_IDENTIFICATION="sv_SE.UTF-8"
-# LC_ALL=sv_SE.UTF-8
-
-
-
-=======
 
 # export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="sv_SE.UTF-8"
@@ -38,4 +18,4 @@ export HISTSIZE=10000
 shopt -s histappend
 # append each line to the history individually
 export PROMPT_COMMAND="history -a"
->>>>>>> 387799714901bb4dfa68b5fb2d2cc9208359d0d8
+
