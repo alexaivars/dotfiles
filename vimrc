@@ -1,207 +1,345 @@
-" based on http://github.com/jferris/config_files/blob/master/vimrc
+" call pathogen#infect()
+" Example Vim configuration.
+" Copy or symlink to ~/.vimrc or ~/_vimrc.
 
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
+filetype off
+filetype plugin indent on
 
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
+set nocompatible                  " Must come first because it changes other options.
 
-set nobackup
-set nowritebackup
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
+silent! call pathogen#runtime_append_all_bundles()
 
-" Don't use Ex mode, use Q for formatting
-map Q gq
+syntax enable                     " Turn on syntax highlighting.
+filetype plugin indent on         " Turn on file type detection.
 
-" This is an alternative that also works in block mode, but the deleted
-" text is lost and it only works for putting the current register.
-"vnoremap p "_dp
+runtime macros/matchit.vim        " Load the matchit plugin.
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax on
-  set hlsearch
-endif
+set showcmd                       " Display incomplete commands.
+set showmode                      " Display the mode you're in.
 
-" Switch wrap off for everything
-set nowrap
+set backspace=indent,eol,start    " Intuitive backspacing.
 
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
+set hidden                        " Handle multiple buffers better.
 
-  " Set File type to 'text' for files ending in .txt
-  autocmd BufNewFile,BufRead *.txt setfiletype text
+set wildmenu                      " Enhanced command line completion.
+set wildmode=list:longest         " Complete files like a shell.
 
-  " Enable soft-wrapping for text files
-  autocmd FileType text,markdown,html,xhtml,eruby setlocal wrap linebreak nolist
+set ignorecase                    " Case-insensitive searching.
+set smartcase                     " But case-sensitive if expression contains a capital letter.
 
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
+set number                      " Show line numbers.
+set ruler                         " Show cursor position.
 
-  " For all text files set 'textwidth' to 78 characters.
-  " autocmd FileType text setlocal textwidth=78
+" set nonumber foldcolumn=1
+" hi foldcolumn guibg=#151515 guifg=#151515
 
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
+set incsearch                     " Highlight matches as you type.
+set hlsearch                      " Highlight matches.
+set showmatch
 
-  " Automatically load .vimrc source when saved
-  autocmd BufWritePost .vimrc source $MYVIMRC
+" set wildignore+='tmp/*'
+set wildignore='tmp/*,*/tmp/*,*/tmp/**/*'
 
-  augroup END
+command! W :w
 
-else
+nnoremap <leader><space> :noh<cr>
+nnoremap <leader>c :noh<cr>
+nnoremap <leader>gc Gwrite \| Gcommit -m '
 
-  set autoindent		" always set autoindenting on
+" bind control-l to hashrocket
+imap <C-l> <Space>=><Space>"
 
-endif " has("autocmd")
 
-" if has("folding")
-  " set foldenable
-  " set foldmethod=syntax
-  " set foldlevel=1
-  " set foldnestmax=2
-  " set foldtext=strpart(getline(v:foldstart),0,50).'\ ...\ '.substitute(getline(v:foldend),'^[\ #]*','','g').'\ '
-" endif
+" Some options from
+" http://stevelosh.com/blog/2010/09/coming-home-to-vim/#making-vim-more-useful
+set encoding=utf-8
+set autoindent
+set cursorline
+set modelines=0
+set ttyfast
+" set relativenumber
+autocmd BufEnter * set relativenumber
 
-" Softtabs, 2 spaces
-set tabstop=2
-set shiftwidth=2
-set expandtab
+set nowrap                        " Turn on line wrapping.
+set scrolloff=3                   " Show 3 lines of context around the cursor.
 
-" Always display the status line
-set laststatus=2
+set title                         " Set the terminal's title
 
-" \ is the leader character
-let mapleader = ","
+set visualbell                    " No beeping.
 
-" Edit the README_FOR_APP (makes :R commands work)
-map <Leader>R :e doc/README_FOR_APP<CR>
+" Folding settings
+set foldmethod=indent
+set foldlevel=1
+set foldnestmax=3
+set nofoldenable
 
-" Leader shortcuts for Rails commands
-map <Leader>m :Rmodel 
-map <Leader>c :Rcontroller 
-map <Leader>v :Rview 
-map <Leader>u :Runittest 
-map <Leader>f :Rfunctionaltest 
-map <Leader>tm :RTmodel 
-map <Leader>tc :RTcontroller 
-map <Leader>tv :RTview 
-map <Leader>tu :RTunittest 
-map <Leader>tf :RTfunctionaltest 
-map <Leader>sm :RSmodel 
-map <Leader>sc :RScontroller 
-map <Leader>sv :RSview 
-map <Leader>su :RSunittest 
-map <Leader>sf :RSfunctionaltest 
-
-" Hide search highlighting
-map <Leader>h :set invhls <CR>
-
-" Opens an edit command with the path of the currently edited file filled in
-" Normal mode: <Leader>e
-map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-
-" Opens a tab edit command with the path of the currently edited file filled in
-" Normal mode: <Leader>t
-map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
-
-" Inserts the path of the currently edited file into a command
-" Command mode: Ctrl+P
-cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+" Move lines up and down
+" noremap <C-J> :m +1 <CR>
+" noremap <C-K> :m -2 <CR>
 
 " Duplicate a selection
 " Visual mode: D
 vmap D y'>p
 
-" Press Shift+P while in visual mode to replace the selection without
-" overwriting the default register
-vmap P p :call setreg('"', getreg('0')) <CR>
-
-" For Haml
-au! BufRead,BufNewFile *.haml         setfiletype haml
-
 " No Help, please
-nmap <F1> <Esc>
+noremap <F1> <Esc>
 
-" Press ^F from insert mode to insert the current file name
-imap <C-F> <C-R>=expand("%")<CR>
+set nobackup                      " Don't make a backup before overwriting a file.
+set nowritebackup                 " And again.
+set noswapfile
+" set directory=$HOME/.vim/tmp        " Keep swap files in one location
+" set backupdir=$HOME/.vim/tmp
 
-" Maps autocomplete to tab
-imap <Tab> <C-N>
+set tabstop=2 softtabstop=2 shiftwidth=2
+" set expandtab
 
-imap <C-L> <Space>=><Space>
+set laststatus=2                 " Show the status line all the time
 
-" Display extra whitespace
-" set list listchars=tab:»·,trail:·
+" Useful status information at bottom of screen
+set statusline=[%n]\ %<%.99F\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
-" Edit routes
+
+" colorscheme railscasts_hms
+" color jellybeans+
+
+
+" let g:solarized_termcolors=16
+" set background=dark
+" colorscheme solarized
+colorscheme railscasts
+
+let mapleader = ","
+
+" Moving
+nnoremap / /\v
+vnoremap / /\v
+
+" "makes j and k work the way you expect instead of working in some archaic
+" “movement by file line instead of screen line” fashion."
+
+" nnoremap <up> <nop>
+" nnoremap <down> <nop>
+" nnoremap <left> <nop>
+" nnoremap <right> <nop>
+" inoremap <up> <nop>
+" inoremap <down> <nop>
+" inoremap <left> <nop>
+" inoremap <right> <nop>
+nnoremap j gj
+nnoremap k gk
+nnoremap <leader><cr> o<esc>
+
+" map <leader>c :ConqueTermSplit bash<cr>
+
+" Speed up viewport scrolling
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
+
+" Searching
+set gdefault
+
+map <F4> :ls<CR>:b<space>
+
+" In visual mode, indent and keep selection
+vmap > >gv
+vmap < <gv
+
+
+" Move selection up/down (add =gv to reindent after move)
+vmap <D-S-Up> :m-2<CR>gv
+vmap <D-S-Down> :m'>+<CR>gv
+
+" Tab mappings.
+" noremap <leader>tt :tabnew<cr>
+" noremap <leader>te :tabedit
+" noremap <leader>tc :tabclose<cr>
+" noremap <leader>to :tabonly<cr>
+" noremap <leader>tn :tabnext<cr>
+" noremap <leader>tp :tabprevious<cr>
+" noremap <leader>tf :tabfirst<cr>
+" noremap <leader>tl :tablast<cr>
+" noremap <leader>tm :tabmove
+noremap <D-S-Left> :tabprevious<cr>
+noremap <D-S-Right> :tabnext<cr>
+" map <Leader>b :TMiniBufExplorer<cr>
+
+" F2 toggles folding
+inoremap <F2> <C-O>za
+nnoremap <F2> za
+onoremap <F2> <C-C>za
+vnoremap <F2> zf
+
+" Nerdtree (,n)
+map <F3> :NERDTreeToggle \| :silent NERDTreeMirror<CR>
+
+" autocmd BufEnter * NERDTreeMirror
+" autocmd BufNew * wincmd l
+
+" Split screen things
+" http://stevelosh.com/blog/2010/09/coming-home-to-vim/
+nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+
+" Create a split on the given side.
+" From http://technotales.wordpress.com/2010/04/29/vim-splits-a-guide-to-doing-exactly-what-you-want/ via joakimk.
+nmap <leader><left>   :leftabove  vnew<CR>
+nmap <leader><right>  :rightbelow vnew<CR>
+nmap <leader><up>     :leftabove  new<CR>
+nmap <leader><down>   :rightbelow new<CR>
+
+
+" nmap <leader>eh :'<,'>s/\v\</\&lt;/ | execute "normal gv" | '<,'>s/\v\>/&gt;/<CR>
+
+" Edit shortcuts
+" http://vimcasts.org/episodes/the-edit-command/
+map <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
+map <leader>es :sp <C-R>=expand("%:p:h") . "/" <CR>
+map <leader>ev :vsp <C-R>=expand("%:p:h") . "/" <CR>
+map <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
+
+
+" Buffer navigation
+noremap <Leader>a :bprev<Return>
+noremap <Leader>s :bnext<Return>
+noremap <D-[> :bprev<return>
+noremap <D-]> :bnext<return>
+
+" Command T configuration
+noremap <leader>t :CommandT<Return>
+let g:CommandTMaxHeight=20
+
+vmap <leader>eh :s/\v\</\&lt;/ <CR> :execute "normal" "gv"<CR> :s/\v\>/\&gt;/<CR> :noh<CR>
+
+" ZoomWin configuration
+map <Leader>z :ZoomWin<CR>
+
+" Ack/Quickfix windows
+nmap <Leader>q :cclose<CR>
+nmap <leader>h :noh<cr>
+
+" CTags
+" map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
+
+" Remember last location in file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal g'\"" | endif
+endif
+
+noremap <Leader>rk :Rake<CR>
+
+" Controversial...swap colon and semicolon for easier commands
+nnoremap ; :
+vnoremap ; :
+
+" Rails Edit routes
 command! Rroutes :e config/routes.rb
 command! Rschema :e db/schema.rb
+noremap <leader>rm :Rmodel
+noremap <leader>rc :Rcontroller
+noremap <leader>rv :Rview
+nnoremap <leader>r :w \| !rspec --no-color %<cr>
 
-" Local config
-if filereadable(".vimrc.local")
-  source .vimrc.local
+" Automatic fold settings for specific files. Uncomment to use.
+" autocmd FileType ruby setlocal foldmethod=syntax
+" autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
+" autocmd FileType scss setlocal foldmethod=indent shiftwidth=2 tabstop=2
+
+" Source the vimrc file after saving it
+if has("autocmd")
+  autocmd BufWritePost .vimrc source $MYVIMRC
+	autocmd BufNewFile,BufRead *.coffee set filetype=coffee
+	autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 endif
 
-" Use Ack instead of Grep when available
-if executable("ack")
-  set grepprg=ack\ -H\ --nogroup\ --nocolor\ --ignore-dir=tmp\ --ignore-dir=coverage
+" http://vimcasts.org/episodes/running-vim-within-irb/
+" Restore cursor position
+" autocmd BufReadPost *
+"   \ if line("'\"") > 1 && line("'\"") <= line("$") |
+"   \   exe "normal! g`\"" |
+"   \ endif
+
+" au FocusLost * :wa
+" au FocusLost silent! :wa
+" autocmd BufLeave,FocusLost * silent! wall
+" autocmd BufLeave,FocusLost silent! wall
+
+" For the MakeGreen plugin and Ruby RSpec. Uncomment to use.
+" autocmd BufNewFile,BufRead *_spec.rb compiler rspec
+
+" augroup md
+"   autocmd BufRead *.md set ai formatoptions=tcroqn comments=n:&gt;
+" augroup END
+
+" Misc
+map <Leader>u <Plug>MakeGreen
+noremap <leader>cc Ypkgccj
+
+" command to strip all trailing whitespace
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" I use Ack a lot (described below), so I mapped a leader key for it:
+nnoremap <leader>f :Ack
+
+"  work with HTML often, so I have ,ft mapped to a “fold tag” function:
+nnoremap <leader>ft Vatzfuu
+
+" This next mapping imitates TextMates Ctrl+Q function to re-hardwrap
+nnoremap <leader>q gqip
+
+" I have a ,v mapping to reselect the text that was just pasted so I can
+" perform commands (like indentation) on it:
+nnoremap <leader>v V`]
+
+" quickly open up my ~/.vimrc file in a vertically split window so I can add new things to it on the fly.
+nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+
+nnoremap <leader>ct :CommandTFlush<CR>
+
+set whichwrap+=<,>,[,]
+
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+		  \ | wincmd p | diffthis
 endif
 
-" Color scheme
-" colorscheme vividchalk
-" highlight NonText guibg=#060606
-" highlight Folded  guibg=#0A0A0A guifg=#9090D0
+command! LargeFont :set guifont=Menlo:h18
+command! SmallFont :set guifont=Menlo:h11
 
-" Numbers
-set number
-set numberwidth=5
+if &t_Co > 2 || has("gui_runing")
+  syntax on
+endif
 
-" Snippets are activated by Shift+Tab
-let g:snippetsEmu_key = "<S-Tab>"
+noremap <Leader>d <Esc>:call CleanClose(1)<CR>
 
-" Tab completion options
-" (only complete to the longest unambiguous match, and show a menu)
-set completeopt=longest,menu
-set wildmode=list:longest,list:full
-set complete=.,t
+function! CleanClose(tosave)
+  if (a:tosave == 1)
+      w!
+  endif
+  let todelbufNr = bufnr("%")
+  let newbufNr = bufnr("#")
+  if ((newbufNr != -1) && (newbufNr != todelbufNr) && buflisted(newbufNr))
+      exe "b".newbufNr
+  else
+      bnext
+  endif
 
-" case only matters with mixed case expressions
-set ignorecase
-set smartcase
+  if (bufnr("%") == todelbufNr)
+      new
+  endif
+  exe "bd".todelbufNr
+endfunction
 
-" Tags
-let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
-set tags=./tags;
+" Disable netrw's autocmd, since we're ALWAYS using NERDTree
+runtime plugin/netRwPlugin.vim
+augroup FileExplorer
+  au!
+augroup END
 
-let g:fuf_splitPathMatching=1
+let g:NERDTreeHijackNetrw = 0
 
-" Open URL
-" command -bar -nargs=1 OpenURL :!open <args>
-" function! OpenURL()
-"   let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;:]*')
-"   echo s:uri
-"   if s:uri != ""
-" 	  exec "!open \"" . s:uri . "\""
-"   else
-" 	  echo "No URI found in line."
-"   endif
-" endfunction
-" map <Leader>w :call OpenURL()<CR>
-" 
+

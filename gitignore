@@ -1,4 +1,9 @@
 .DS_Store
 .svn
 *~
-.*.swp
+*.swp
+*.pyc
+*.sass-cache
+*.jhw-cache
+*.tmp
+.livereload

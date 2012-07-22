@@ -1,5 +1,6 @@
-export PS1="\u@\w: "
+export PS1="\u@\h \w: "
 export EDITOR="vim"
+<<<<<<< HEAD
 export LC_ALL=""
 export LC_CTYPE="sv_SE.UTF-8"
 # export LANG="en_US.utf8"
@@ -18,3 +19,23 @@ export LC_CTYPE="sv_SE.UTF-8"
 
 
 
+=======
+
+# export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="sv_SE.UTF-8"
+
+## SVT EXTRAS 
+# export ANT_OPTS='-Dfile.encoding=iso8859_1 -Xms512m -Xmx1024m'
+export ANT_OPTS='-Dfile.encoding=UTF-8 -Xms512m -Xmx1024m' 
+export ANT_HOME=/opt/local/share/java/apache-ant/
+
+
+#bash should ignore duplicates in the bash history
+export HISTCONTROL="erasedups ignoreboth"
+#limit history size to 10000
+export HISTSIZE=10000
+# always append to .bash_history
+shopt -s histappend
+# append each line to the history individually
+export PROMPT_COMMAND="history -a"
+>>>>>>> 387799714901bb4dfa68b5fb2d2cc9208359d0d8

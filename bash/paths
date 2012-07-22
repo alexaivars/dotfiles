@@ -1,3 +1,6 @@
+
+
+
 export PATH=/usr/X11/bin
 export PATH=/bin:/sbin:$PATH
 export PATH=/usr/bin:/usr/sbin:$PATH
@@ -8,3 +11,12 @@ export PATH=.:~/bin:~/sbin:$PATH
 # export PATH=$PATH:~/.gem/ruby/1.8/bin
 export MANPATH=/usr/local/man:/usr/local/mysql/man:$MANPATH
 export MANPATH=/opt/local/man/:$MANPATH
+
+# Java
+export JAVA_HOME=/Library/Java/Home/
+
+# Maven
+# export MAVEN_OPTS="-Xmx1024M -XX:MaxPermSize=1024M -Dfile.encoding=utf8 -Dhttps.proxyHost=proxy.svt.se -Dhttps.proxyPort=8080"
+
+# Jrebel
+# export JAVA_OPTS="-javaagent:/opt/svt/jrebel/jrebel.jar -DrebelProjectRoot=/Users/alex/projects/svt/escenic $JAVA_OPTS"
