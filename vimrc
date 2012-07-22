@@ -58,7 +58,9 @@ set cursorline
 set modelines=0
 set ttyfast
 " set relativenumber
-autocmd BufEnter * set relativenumber
+if v:version >= 730 && has("autocmd")
+	autocmd BufEnter * set relativenumber
+endif 
 
 set nowrap                        " Turn on line wrapping.
 set scrolloff=3                   " Show 3 lines of context around the cursor.
