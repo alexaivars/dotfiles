@@ -143,7 +143,7 @@ nmap <F1> <Esc>
 imap <C-F> <C-R>=expand("%")<CR>
 
 " Maps autocomplete to tab
-imap <S-Tab> <C-N>
+imap <Tab> <C-N>
 
 imap <C-L> <Space>=><Space>
 
@@ -193,15 +193,15 @@ set tags=./tags;
 let g:fuf_splitPathMatching=1
 
 " Open URL
-command -bar -nargs=1 OpenURL :!open <args>
-function! OpenURL()
-  let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;:]*')
-  echo s:uri
-  if s:uri != ""
-	  exec "!open \"" . s:uri . "\""
-  else
-	  echo "No URI found in line."
-  endif
-endfunction
-map <Leader>w :call OpenURL()<CR>
-
+" command -bar -nargs=1 OpenURL :!open <args>
+" function! OpenURL()
+"   let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;:]*')
+"   echo s:uri
+"   if s:uri != ""
+" 	  exec "!open \"" . s:uri . "\""
+"   else
+" 	  echo "No URI found in line."
+"   endif
+" endfunction
+" map <Leader>w :call OpenURL()<CR>
+" 
