@@ -1,0 +1,9 @@
+selectp -t 0
+splitw -h -p 65
+selectp -t 0
+splitw -v -p 33
+selectp -t 0
+splitw -v -p 50
+selectp -t 0
+swapp -s 0 -t 3
+selectp -t 3

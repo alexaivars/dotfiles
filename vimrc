@@ -2,6 +2,7 @@
 " Example Vim configuration.
 " Copy or symlink to ~/.vimrc or ~/_vimrc.
 
+
 filetype off
 filetype plugin indent on
 
@@ -12,7 +13,7 @@ silent! call pathogen#runtime_append_all_bundles()
 syntax enable                     " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
 
-runtime macros/matchit.vim        " Load the matchit plugin.
+" runtime macros/matchit.vim        " Load the matchit plugin.
 
 set showcmd                       " Display incomplete commands.
 set showmode                      " Display the mode you're in.
@@ -106,9 +107,25 @@ set statusline=[%n]\ %<%.99F\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*Cap
 
 
 " let g:solarized_termcolors=16
-" set background=dark
 " colorscheme solarized
-colorscheme railscasts
+" set background=dark
+
+" set t_Co=16
+" colorscheme railscasts
+
+" set background=dark
+" solarized options 
+" let g:solarized_termcolors = 16
+" let g:solarized_visibility = "high"
+" let g:solarized_contrast = "high"
+" let g:solarized_style = "dark"
+" colorscheme solarized
+
+syntax on
+colorscheme railscasts_16
+" set background=dark
+" let g:solarized_termtrans = 1
+" colorscheme solarized 
 
 let mapleader = ","
 
@@ -152,12 +169,12 @@ vmap <D-S-Up> :m-2<CR>gv
 vmap <D-S-Down> :m'>+<CR>gv
 
 " Tab mappings.
-" noremap <leader>tt :tabnew<cr>
+noremap <leader>tt :tabnew<cr>
 " noremap <leader>te :tabedit
-" noremap <leader>tc :tabclose<cr>
+noremap <leader>tc :tabclose<cr>
 " noremap <leader>to :tabonly<cr>
-" noremap <leader>tn :tabnext<cr>
-" noremap <leader>tp :tabprevious<cr>
+noremap <leader>tn :tabnext<cr>
+noremap <leader>tp :tabprevious<cr>
 " noremap <leader>tf :tabfirst<cr>
 " noremap <leader>tl :tablast<cr>
 " noremap <leader>tm :tabmove
@@ -214,7 +231,7 @@ noremap <D-]> :bnext<return>
 noremap <leader>t :CommandT<Return>
 let g:CommandTMaxHeight=20
 
-vmap <leader>eh :s/\v\</\&lt;/ <CR> :execute "normal" "gv"<CR> :s/\v\>/\&gt;/<CR> :noh<CR>
+" vmap <leader>eh :s/\v\</\&lt;/ <CR> :execute "normal" "gv"<CR> :s/\v\>/\&gt;/<CR> :noh<CR>
 
 " ZoomWin configuration
 map <Leader>z :ZoomWin<CR>
@@ -256,6 +273,8 @@ if has("autocmd")
   autocmd BufWritePost .vimrc source $MYVIMRC
 	autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 	autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+	autocmd BufNewFile,BufReadPost *.py set filetype=python
+	autocmd BufNewFile,BufReadPost *.py setl shiftwidth=2 expandtab
 endif
 
 " http://vimcasts.org/episodes/running-vim-within-irb/
@@ -317,6 +336,20 @@ if &t_Co > 2 || has("gui_runing")
 endif
 
 noremap <Leader>d <Esc>:call CleanClose(1)<CR>
+
+" http://vim.wikia.com/wiki/Search_for_visually_selected_text
+" Search for selected text, forwards or backwards.
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+
 
 function! CleanClose(tosave)
   if (a:tosave == 1)

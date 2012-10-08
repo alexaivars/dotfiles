@@ -18,4 +18,20 @@ alias cdpaste='cd "`pbpaste`"'
 alias tunnel='ssh -D 2000 -o "ProxyCommand corkscrew proxy.svt.se 8080 %h %p" alex@drutten.krmg.se'
 alias reload='. ~/.bash_profile'
 alias watch-css='sass --watch /Users/alex/projects/svt/escenic/publications/svtse/src/main/sass/svt/css/:/opt/svt/escenic-tomcat/apache-tomcat/publications/svtse/statiskt/skins/svt/css /Users/alex/projects/svt/escenic/svt-sass-core/src/main/sass/svt/css/:/dev/null'
+# alias tmux='TERM=xterm-256color /opt/local/bin/tmux'
+# alias vim='TERM=xterm-256color /opt/local/bin/vim'
+# alias vi='TERM=xterm-256color /opt/local/bin/vi'
+
+
+
+# svt project helpers
+alias ece-images='ant -f /Users/alex/projects/svt/escenic/publications/svtse/ant/build-sass.xml deploy-CSS-images'
+alias ece-css='ant -f /Users/alex/projects/svt/escenic/publications/svtse/ant/build-sass.xml deploy-CSS'
+alias ece-lint='ant -f /Users/alex/projects/svt/escenic/publications/svt-publication-core/ant/build-js-cc-opt.xml jslint'
+alias ece-js='ant -f /Users/alex/projects/svt/escenic/publications/svtse/ant/build-js-cc-opt.xml deploy'
+alias ece-debug='ant -f /Users/alex/projects/svt/escenic/publications/svtse/ant/build-js-cc-opt.xml deploy_debug'
+alias ece-css='sass /Users/alex/projects/svt/escenic/publications/svtse/src/main/sass/svt/css/:/opt/svt/escenic-tomcat/apache-tomcat/publications/svtse/statiskt/skins/svt/css /Users/alex/projects/svt/escenic/svt-sass-core/src/main/sass/svt/css/:/dev/null'
+
+
+
 

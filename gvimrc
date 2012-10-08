@@ -3,9 +3,9 @@ set guioptions-=r " hide scrollbar
 set go-=L " hide left scrollbar when spliting window
 
 set lines=55 columns=80
-
-let g:solarized_termcolors=256                                                                                                                                                                                                                                
-set background=dark
+set t_Co=256
+" let g:solarized_termcolors=256                                                                                                                                                                                                                                
+" set background=dark
 " colorscheme solarized
 colorscheme railscasts
 
