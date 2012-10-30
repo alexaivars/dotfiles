@@ -27,17 +27,33 @@ function psa () {
 # proxy on; proxy off
 function proxy () {
   if [ $1 == "on" ]; then
-    export http_proxy=http://proxy.svt.se:8080
-    export https_proxy=https://proxy.svt.se:8080
-    export no_proxy='*svt.se, *.local, ecedemo, ecedemo5, localhost, svtiwiki, legolas'
+    export HTTP_PROXY=http://proxy.svt.se:8080
+		export RSYNC_PROXY=proxy.svt.se:8080
+		export FTP_PROXY=http://proxy.svt.se:8080
+		export HTTPS_PROXY=https://proxy.svt.se:8080
+    export NO_PROXY='*svt.se, *.local, ecedemo, ecedemo5, localhost, svtiwiki, legolas'
 		export GIT_SSH='svt-git-ssh'
-		echo "set http_proxy, https_proxy and no_proxy GIT_SSH variables."
+    export http_proxy=http://proxy.svt.se:8080
+		export rsync_proxy=proxy.svt.se:8080
+		export ftp_proxy=http://proxy.svt.se:8080
+		export https_proxy=https://proxy.svt.se:8080
+    export no_proxy='*svt.se, *.local, ecedemo, ecedemo5, localhost, svtiwiki, legolas'
+		export git_ssh='svt-git-ssh'
+		echo "set http_proxy, https_proxy and no_proxy git_ssh variables."
   else
+    unset HTTP_PROXY
+    unset HTTPS_PROXY
+    unset RSYNC_PROXY
+    unset HTTPS_PROXY
+    unset NO_PROXY
+		unset GIT_SSH	
     unset http_proxy
     unset https_proxy
+    unset rsync_proxy
+    unset https_proxy
     unset no_proxy
-		unset GIT_SSH
-		echo "unset http_proxy, https_proxy and no_proxy GIT_SSH variables."
+		unset git_ssh	
+		echo "unset http_proxy, https_proxy and no_proxy git_ssh variables."
   fi
 }
 

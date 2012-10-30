@@ -1,0 +1,54 @@
+#
+#   IRC Script Program. For use with ircii-EPIC5 clients.
+#   Copyright (C) 2000 SrfRoG (cag@codehack.com)
+#
+# ---------------------------------------------------------------------------
+# All code by SrfRoG, unless specified. Visit http://lice.codehack.com
+# ---------------------------------------------------------------------------
+# Updated for EPIC5 by tjh
+
+IF (word(2 $loadinfo()) != [pf]) {
+  LOAD -pf $word(1 $loadinfo());
+  RETURN;
+};
+
+PACKAGE LiCe;
+
+ALIAS ignore {
+  @ :types = strlen($1) ? [$1-] : [ALL CRAP -PUBLIC];
+  SWITCH ($0) {
+    () {
+      uecho Usage: IGNORE < nick | n!u@h pattern > [[-|+]Ignore types] [reason <your reason>] [timeout <time in secs>];
+      uecho Usage: IGNORE < channel | channel pattern > [[-|+]Ignore types] [reason <your reason>] [timeout <time in secs>];
+    }
+    (#*) (&*) (!*) {//IGNORE $0 $types; @lice.set(|$hash_32bit($0) $0 $igtype($0))};
+    (*!*) (*@*) (*.*) {//IGNORE $uhc($0) $types; @lice.set(|$hash_32bit($0) $0 $igtype($uhc($0)))};
+    (*) {
+      @ :user = get_uh($0);
+      UNLESS (strlen($user)) {
+        XECHO -B $0: Nick not online.;
+        RETURN;
+      };
+      @ :pattern = mask(0 $0!$user);
+      //IGNORE $pattern $types;
+      @lice.set(|$hash_32bit($pattern) $pattern $igtype($pattern));
+    };
+  };
+};
+
+ALIAS protect {
+  UNLESS (rmatch(*!*@*.* $igmask(*)) > 0) {
+    //IGNORE *!*@*.* ALL;
+    IF (_proc.silence()) {
+      //^SILENCE +*@*;
+    };
+  }{
+    //IGNORE *!*@*.* NONE;
+    IF (_proc.silence()) {
+      //^SILENCE -*@*;
+    };
+  };
+};
+
+#HS/03
+#tjh/12

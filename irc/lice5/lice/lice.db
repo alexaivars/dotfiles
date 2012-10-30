@@ -1,0 +1,114 @@
+#
+#   IRC Script Program. For use with ircii-EPIC5 clients.
+#   Copyright (C) 2000 SrfRoG (cag@codehack.com)
+#
+# ---------------------------------------------------------------------------
+# lice.db written by tjh for LiCe5.2.0+ for EPIC5. tjh - tim@muppetz.com
+#
+# This file opens the database file in which variables are stored and creates
+# some aliases to easily manage the variables in the DB.
+# It also handles the reload of all settings (lice.readdb)
+#
+# Autosave of 
+#	* /SETs
+#	* /IGNOREs
+#	* /SERVERs
+#	* /NOTIFYs
+#	* LiCe Script Settings
+#
+# is handled by this file.
+#
+# http://lice.muppetz.com - LiCe5
+# ---------------------------------------------------------------------------
+#
+
+IF (word(2 $loadinfo()) != [pf]) {
+  LOAD -pf $word(1 $loadinfo());
+  RETURN;
+};
+
+PACKAGE LiCe;
+
+@ mkdir($lice.save_path);
+
+# open database
+@ lice.fd = dbmctl(OPEN STD $(lice.save_path)/lice.db);
+
+# check we got the db open and if not, die.
+IF (lice.fd == -1) {
+  CLEAR;
+  XECHO;
+  XECHO [LiCe System Message];
+  XECHO;
+  XECHO ERROR: Unable to open $(lice.save_path)/lice.db - Please check this path is valid!;
+  XECHO ;
+  XECHO Unable to continue.;
+  XECHO ;
+  XECHO 5Exiting in 5 seconds.;
+  ^PAUSE 5;
+  //^QUIT;
+};
+
+### database routines
+ALIAS lice.add (varname, data) {@ dbmctl(ADD $lice.fd "$tolower($varname)" $data)};
+ALIAS lice.set (varname, data) {@ dbmctl(CHANGE $lice.fd "$tolower($varname)" $data)};
+ALIAS lice.get (varname) {@ FUNCTION_RETURN = dbmctl(READ $lice.fd "$tolower($varname)")};
+ALIAS lice.del (varname) {@ dbmctl(DELETE $lice.fd "$tolower($varname)")};
+
+# Small alert if the DB is still open.
+IF (lice.get(db.status) == 1) {TIMER 2 uecho Warning: The LiCe database is already marked open! Are you already running LiCe?};
+
+# mark database as open
+@lice.set(db.status 1);
+
+# Erase old client state
+@lice.del(*CLIENT_INFORMATION);
+
+# restore database state.
+ALIAS lice.readdb {
+  FE ($sort($dbmctl(ALL_KEYS $lice.fd))) dbi {
+    @ :type = left(1 $dbi);
+    SWITCH ($type) {
+      (\\*) {
+        @ :val = lice.get($dbi);
+        UNLESS (val == [<unset>]) {
+          //^SET $after(* $dbi) $val;
+        };
+      };
+      (|) {//^IGNORE $lice.get($dbi)};
+      (!) {^ASSIGN Chanlog$after(! $dbi) $lice.get($dbi)};
+      (&) {//^SERVER -ADD $lice.get($dbi)};
+    };
+  };
+};
+
+# save servers routine
+ALIAS lice.saveservers {
+  FE ($dbmctl(ALL_KEYS $lice.fd)) ls {
+    @ :sid= after(& $ls);
+    UNLESS (strlen($sid) == 0) {
+      @lice.del($ls);
+    };
+  };
+  FE ($serverctl(GMATCH *)) id {
+    # work around epic5 bug - $serverctl(GMATCH *)) currently returns servers that have been deleted!
+    IF (serverctl(GET $id NAME)) {
+      @lice.add(&server$(id) $serverctl(GET $id FULLDESC));
+    };
+  };
+};
+
+# Auto save of notify
+ALIAS notify {
+  //NOTIFY $*;
+  @lice.set (lice.notify $notify());
+};
+
+# Auto save of servers
+ALIAS server {
+  //SERVER $*;
+  IF (([$0] =~ [-D*]) || ([$0] =~ [-U*])) {lice.saveservers};
+};
+^ON ^CONNECT * {^TIMER 5 {lice.saveservers}};
+
+#tjh/12
