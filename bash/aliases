@@ -17,7 +17,9 @@ function railsapp {
 alias cdpaste='cd "`pbpaste`"'
 alias tunnel='ssh -D 2000 -o "ProxyCommand corkscrew proxy.svt.se 8080 %h %p" alex@drutten.krmg.se'
 alias reload='. ~/.bash_profile'
-alias watch-css='sass --watch /Users/alex/projects/svt/escenic/publications/svtse/src/main/sass/svt/css/:/opt/svt/escenic-tomcat/apache-tomcat/publications/svtse/statiskt/skins/svt/css /Users/alex/projects/svt/escenic/svt-sass-core/src/main/sass/svt/css/:/dev/null'
+# alias watch-css='sass --watch /Users/alex/projects/svt/escenic/publications/svtse/src/main/sass/svt/css/:/opt/svt/escenic-tomcat/apache-tomcat/publications/svtse/statiskt/skins/svt/css /Users/alex/projects/svt/escenic/svt-sass-core/src/main/sass/svt/css/:/dev/null'
+alias watch-css='hg id -i | xargs -I {} sass --watch /Users/alex/projects/svt/escenic/publications/svtse/src/main/sass/svt/css/:/opt/svt/escenic-tomcat/apache-tomcat/publications/svtse/statiskt/{}/skins/svt/css /Users/alex/projects/svt/escenic/svt-sass-core/src/main/sass/svt/css/:/dev/null'
+
 # alias tmux='TERM=xterm-256color /opt/local/bin/tmux'
 # alias vim='TERM=xterm-256color /opt/local/bin/vim'
 # alias vi='TERM=xterm-256color /opt/local/bin/vi'

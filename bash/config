@@ -11,11 +11,8 @@ export LANG="en_US.UTF-8"
 export LC_MESSAGES="en_US.UTF-8"
 export LC_CTYPE="sv_SE.UTF-8"
 
-## SVT EXTRAS 
 # export ANT_OPTS='-Dfile.encoding=iso8859_1 -Xms512m -Xmx1024m'
 export ANT_OPTS='-Dfile.encoding=UTF-8 -Xms512m -Xmx1024m' 
-export ANT_HOME=/opt/local/share/java/apache-ant/
-
 
 #bash should ignore duplicates in the bash history
 export HISTCONTROL="erasedups ignoreboth"

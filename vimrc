@@ -54,6 +54,7 @@ imap <C-l> <Space>=><Space>"
 " Some options from
 " http://stevelosh.com/blog/2010/09/coming-home-to-vim/#making-vim-more-useful
 set encoding=utf-8
+set fileencoding=utf-8
 set autoindent
 set cursorline
 set modelines=0

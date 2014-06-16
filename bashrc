@@ -14,4 +14,7 @@ if [ -f ~/.rvm/scripts/rvm ]; then
 fi
 
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+if [ -f /usr/local/bin/direnv ]; then
+	eval `/usr/local/bin/direnv hook $0`
+fi
