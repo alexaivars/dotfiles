@@ -1,0 +1,20 @@
+[auth]
+bb.prefix=bitbucket.org
+bb.username=alexaivars
+# bb.password=
+
+[alias]
+st = !hg status $($HG root) $HG_ARGS
+
+[ui]
+username=alexander aivars <alex@aivars.se>
+
+[extensions]
+hgk =
+mq =
+graphlog = 
+purge =
+shelve =
+
+[hgk]
+path=/Users/alex/bin/hgk
