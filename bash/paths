@@ -9,6 +9,7 @@ export PATH=./node_modules/.bin:$PATH							# Add local node binarys
 export PATH=~/.rvm/bin:$PATH									# Add RVM to PATH for scripting
 export PATH=/usr/local/heroku/bin:$PATH						# Heroku Toolbelt   
 export PATH=/opt/local/lib/php/pear/bin:$PATH
+export PATH=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH
 # export PATH=$PATH:~/.gem/ruby/1.8/bin
 
 # Man
@@ -24,13 +25,20 @@ export ANT_HOME=/usr/share/ant/
 
 # Maven
 # export MAVEN_OPTS="-Xmx1024M -XX:MaxPermSize=1024M -Dfile.encoding=utf8 -Dhttps.proxyHost=proxy.svt.se -Dhttps.proxyPort=8080"
+export MAVEN_HOME=/opt/local/share/java/maven2
+export MAVEN_M2=/opt/local/share/java/maven2
+
+# Gradle
+export GRADLE_HOME=/opt/local/share/java/gradle
 
 # Jrebel
 #export JAVA_OPTS="-javaagent:/opt/svt/jrebel/jrebel.jar -DrebelProjectRoot=/Users/alex/projects/svt/escenic $JAVA_OPTS"
 
-# Golang
-export PATH=/usr/local/go/bin:$PATH
 
+# Golang
+export GOPATH=~/go;
+export PATH=/usr/local/go/bin:$PATH
+export PATH=$GOPATH/bin:$PATH
 
 # SVT
 export ECE_CHECKOUT_ROOT=/Users/alex/projects/svt/escenic

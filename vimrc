@@ -276,6 +276,9 @@ if has("autocmd")
 	autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 	autocmd BufNewFile,BufReadPost *.py set filetype=python
 	autocmd BufNewFile,BufReadPost *.py setl shiftwidth=2 expandtab
+	autocmd BufNewFile,BufReadPost *.go set filetype=go
+	autocmd BufNewFile,BufReadPost *.go setl shiftwidth=2 expandtab
+	" autocmd FileType go autocmd BufWritePre <buffer> Fmt
 endif
 
 " http://vimcasts.org/episodes/running-vim-within-irb/
