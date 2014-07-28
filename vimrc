@@ -145,6 +145,11 @@ vnoremap / /\v
 " inoremap <down> <nop>
 " inoremap <left> <nop>
 " inoremap <right> <nop>
+
+" makes omnifunc work with ctrl space
+" inoremap <C-Space> <C-x><C-o>
+" inoremap <C-@> <C-Space>
+
 nnoremap j gj
 nnoremap k gk
 nnoremap <leader><cr> o<esc>
