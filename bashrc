@@ -20,3 +20,6 @@ fi
 if [ -f /usr/local/bin/direnv ]; then
 	eval `/usr/local/bin/direnv hook $0`
 fi
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

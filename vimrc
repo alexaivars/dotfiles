@@ -123,10 +123,10 @@ set statusline=[%n]\ %<%.99F\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*Cap
 " colorscheme solarized
 
 syntax on
-colorscheme railscasts_16
-" set background=dark
+"colorscheme railscasts_16
 " let g:solarized_termtrans = 1
-" colorscheme solarized 
+colorscheme solarized 
+set background=dark
 
 let mapleader = ","
 
