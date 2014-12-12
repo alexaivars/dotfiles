@@ -28,6 +28,7 @@
 --ignore-file=match:/[._].*\.swp$/
 --ignore-file=match:/core\.\d+$/
 --ignore-file=match:/[.-]min[.]js$/
+--ignore-file=match:/[.-]bundle[.]js$/
 --ignore-file=match:/[.]js[.]min$/
 --ignore-file=match:/[.]min[.]css$/
 --ignore-file=match:/[.]css[.]min$/
@@ -71,7 +72,7 @@
 --type-add=haskell:ext:hs,lhs
 --type-add=html:ext:htm,html
 --type-add=java:ext:java,properties
---type-add=js:ext:js
+--type-add=js:ext:js,jsx
 --type-add=jsp:ext:jsp,jspx,jhtm,jhtml,tag
 --type-add=json:ext:json
 --type-add=less:ext:less
