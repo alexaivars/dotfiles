@@ -10,6 +10,10 @@ export PATH=~/.rvm/bin:$PATH											# Add RVM to PATH for scripting
 export PATH=/usr/local/heroku/bin:$PATH						# Heroku Toolbelt   
 export PATH=/opt/local/lib/php/pear/bin:$PATH
 export PATH=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH
+export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
+
+export PATH=$HOME/.rbenv/bin:$PATH
+
 # export PATH=$PATH:~/.gem/ruby/1.8/bin
 
 # Man

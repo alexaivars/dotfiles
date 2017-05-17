@@ -8,6 +8,10 @@ filetype plugin indent on
 
 set nocompatible                  " Must come first because it changes other options.
 
+" set mouse=a
+set clipboard=unnamed
+
+
 silent! call pathogen#runtime_append_all_bundles()
 
 syntax enable                     " Turn on syntax highlighting.
@@ -48,8 +52,9 @@ nnoremap <leader>c :noh<cr>
 nnoremap <leader>gc Gwrite \| Gcommit -m '
 
 " bind control-l to hashrocket
-imap <C-l> <Space>=><Space>"
+" imap <C-l> <Space>=><Space>"
 
+map <Leader>pt :Neoformat prettiereslint<CR>
 
 " Some options from
 " http://stevelosh.com/blog/2010/09/coming-home-to-vim/#making-vim-more-useful
@@ -61,7 +66,7 @@ set modelines=0
 set ttyfast
 " set relativenumber if we are using a newer vim
 if v:version >= 703 && has("autocmd")
-	autocmd BufEnter * set relativenumber
+  autocmd BufEnter * set relativenumber
 endif 
 
 set nowrap                        " Turn on line wrapping.
@@ -95,8 +100,9 @@ set noswapfile
 " set backupdir=$HOME/.vim/tmp
 
 set tabstop=2 softtabstop=2 shiftwidth=2
-" set expandtab
-
+set expandtab
+set listchars=tab:»»,trail:·
+set list
 set laststatus=2                 " Show the status line all the time
 
 " Useful status information at bottom of screen
@@ -126,7 +132,7 @@ syntax on
 "colorscheme railscasts_16
 " let g:solarized_termtrans = 1
 colorscheme solarized 
-set background=dark
+set background=light
 
 let mapleader = ","
 
@@ -187,6 +193,8 @@ noremap <leader>tp :tabprevious<cr>
 noremap <D-S-Left> :tabprevious<cr>
 noremap <D-S-Right> :tabnext<cr>
 " map <Leader>b :TMiniBufExplorer<cr>
+
+noremap <leader>tf :Neoformat prettiereslint<cr>
 
 " F2 toggles folding
 inoremap <F2> <C-O>za
@@ -262,13 +270,13 @@ nnoremap ; :
 vnoremap ; :
 
 " Rails Edit routes
-command! Rroutes :e config/routes.rb
-command! Rschema :e db/schema.rb
-noremap <leader>rm :Rmodel
-noremap <leader>rc :Rcontroller
-noremap <leader>rv :Rview
-nnoremap <leader>r :w \| !rspec --no-color %<cr>
-
+" command! Rroutes :e config/routes.rb
+" command! Rschema :e db/schema.rb
+" noremap <leader>rm :Rmodel
+" noremap <leader>rc :Rcontroller
+" noremap <leader>rv :Rview
+" nnoremap <leader>r :w \| !rspec --no-color %<cr>
+ "
 " Automatic fold settings for specific files. Uncomment to use.
 " autocmd FileType ruby setlocal foldmethod=syntax
 " autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
@@ -277,13 +285,13 @@ nnoremap <leader>r :w \| !rspec --no-color %<cr>
 " Source the vimrc file after saving it
 if has("autocmd")
   autocmd BufWritePost .vimrc source $MYVIMRC
-	autocmd BufNewFile,BufRead *.coffee set filetype=coffee
-	autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
-	autocmd BufNewFile,BufReadPost *.py set filetype=python
-	autocmd BufNewFile,BufReadPost *.py setl shiftwidth=2 expandtab
-	autocmd BufNewFile,BufReadPost *.go set filetype=go
-	autocmd BufNewFile,BufReadPost *.go setl shiftwidth=2 expandtab
-	" autocmd FileType go autocmd BufWritePre <buffer> Fmt
+  autocmd BufNewFile,BufRead *.coffee set filetype=coffee
+  autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+  autocmd BufNewFile,BufReadPost *.py set filetype=python
+  autocmd BufNewFile,BufReadPost *.py setl shiftwidth=2 expandtab
+  autocmd BufNewFile,BufReadPost *.go set filetype=go
+  autocmd BufNewFile,BufReadPost *.go setl shiftwidth=2 expandtab
+  " autocmd FileType go autocmd BufWritePre <buffer> Fmt
 endif
 
 " http://vimcasts.org/episodes/running-vim-within-irb/
@@ -306,59 +314,59 @@ endif
 " augroup END
 
 " Misc
-map <Leader>u <Plug>MakeGreen
-noremap <leader>cc Ypkgccj
+" map <Leader>u <Plug>MakeGreen
+" noremap <leader>cc Ypkgccj
 
 " command to strip all trailing whitespace
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+" nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 " I use Ack a lot (described below), so I mapped a leader key for it:
-nnoremap <leader>f :Ack
+" nnoremap <leader>f :Ack
 
 "  work with HTML often, so I have ,ft mapped to a “fold tag” function:
-nnoremap <leader>ft Vatzfuu
+" nnoremap <leader>ft Vatzfuu
 
 " This next mapping imitates TextMates Ctrl+Q function to re-hardwrap
-nnoremap <leader>q gqip
+" nnoremap <leader>q gqip
 
 " I have a ,v mapping to reselect the text that was just pasted so I can
 " perform commands (like indentation) on it:
-nnoremap <leader>v V`]
+" nnoremap <leader>v V`]
 
 " quickly open up my ~/.vimrc file in a vertically split window so I can add new things to it on the fly.
-nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+" nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
-nnoremap <leader>ct :CommandTFlush<CR>
+" nnoremap <leader>ct :CommandTFlush<CR>
 
-set whichwrap+=<,>,[,]
+" set whichwrap+=<,>,[,]
 
-if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
-endif
-
-command! LargeFont :set guifont=Menlo:h18
-command! SmallFont :set guifont=Menlo:h11
+" if !exists(":DiffOrig")
+"   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+"		  \ | wincmd p | diffthis
+" endif
+"
+" command! LargeFont :set guifont=Menlo:h18
+" command! SmallFont :set guifont=Menlo:h11
 
 if &t_Co > 2 || has("gui_runing")
   syntax on
 endif
 
-noremap <Leader>d <Esc>:call CleanClose(1)<CR>
-
+" noremap <Leader>d <Esc>:call CleanClose(1)<CR>
+"
 " http://vim.wikia.com/wiki/Search_for_visually_selected_text
 " Search for selected text, forwards or backwards.
-vnoremap <silent> * :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy/<C-R><C-R>=substitute(
-  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
-vnoremap <silent> # :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy?<C-R><C-R>=substitute(
-  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
-
+" vnoremap <silent> * :<C-U>
+"  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+"  \gvy/<C-R><C-R>=substitute(
+"  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+"  \gV:call setreg('"', old_reg, old_regtype)<CR>
+" vnoremap <silent> # :<C-U>
+"  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+"  \gvy?<C-R><C-R>=substitute(
+"  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+"  \gV:call setreg('"', old_reg, old_regtype)<CR>
+"
 
 function! CleanClose(tosave)
   if (a:tosave == 1)
@@ -386,4 +394,5 @@ augroup END
 
 let g:NERDTreeHijackNetrw = 0
 
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 

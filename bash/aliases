@@ -20,6 +20,7 @@ alias reload='. ~/.bash_profile'
 # alias watch-css='sass --watch /Users/alex/projects/svt/escenic/publications/svtse/src/main/sass/svt/css/:/opt/svt/escenic-tomcat/apache-tomcat/publications/svtse/statiskt/skins/svt/css /Users/alex/projects/svt/escenic/svt-sass-core/src/main/sass/svt/css/:/dev/null'
 alias watch-css='hg id -i | xargs -I {} sass --watch /Users/alex/projects/svt/escenic/publications/svtse/src/main/sass/svt/css/:/opt/svt/escenic-tomcat/apache-tomcat/publications/svtse/statiskt/{}/skins/svt/css /Users/alex/projects/svt/escenic/svt-sass-core/src/main/sass/svt/css/:/dev/null'
 
+alias vi='/usr/local/bin/vim'
 # alias tmux='TERM=xterm-256color /opt/local/bin/tmux'
 # alias vim='TERM=xterm-256color /opt/local/bin/vim'
 # alias vi='TERM=xterm-256color /opt/local/bin/vi'

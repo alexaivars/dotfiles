@@ -21,3 +21,6 @@ if [ -f /usr/local/bin/direnv ]; then
 	eval `/usr/local/bin/direnv hook $0`
 fi
 
+if [ -f /usr/local/bin/rbenv ]; then
+	eval "$(rbenv init -)"
+fi
