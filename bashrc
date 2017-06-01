@@ -4,6 +4,8 @@ source ~/.bash/paths
 source ~/.bash/config
 source ~/.bash/functions
 
+source ~/Dropbox/dotfiles/bash/config
+
 # use settings specific to one system
 if [ -f ~/.bash/`uname -n` ]; then
   source ~/.bash/`uname -n`
