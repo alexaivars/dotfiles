@@ -21,7 +21,7 @@ export MANPATH=/usr/local/man:/usr/local/mysql/man:$MANPATH
 export MANPATH=/opt/local/man/:$MANPATH
 
 # Flash
-export FLEX_HOME=/Developer/SDKs/flex_sdk_4.6
+# export FLEX_HOME=/Developer/SDKs/flex_sdk_4.6
 
 # Java
 export JAVA_HOME=$(/usr/libexec/java_home -v1.7)
@@ -33,19 +33,19 @@ export MAVEN_HOME=/opt/local/share/java/maven2
 export MAVEN_M2=/opt/local/share/java/maven2
 
 # Gradle
-export GRADLE_HOME=/opt/local/share/java/gradle
+# export GRADLE_HOME=/opt/local/share/java/gradle
 
 # Jrebel
-#export JAVA_OPTS="-javaagent:/opt/svt/jrebel/jrebel.jar -DrebelProjectRoot=/Users/alex/projects/svt/escenic $JAVA_OPTS"
+# export JAVA_OPTS="-javaagent:/opt/svt/jrebel/jrebel.jar -DrebelProjectRoot=/Users/alex/projects/svt/escenic $JAVA_OPTS"
 
 
 # Golang
-export GOPATH=~/go;
-export PATH=/usr/local/go/bin:$PATH
-export PATH=$GOPATH/bin:$PATH
+# export GOPATH=~/go;
+# export PATH=/usr/local/go/bin:$PATH
+# export PATH=$GOPATH/bin:$PATH
 
 # SVT
-export ECE_CHECKOUT_ROOT=/Users/alex/projects/svt/escenic
-export ECE_MANAGE_ROOT=/Users/alex/projects/svt/escenic/manage/src/main/resources/manage
-export PATH=/Users/alex/projects/svt/escenic/manage/src/main/resources/manage/bin:$PATH
-export PYTHONPATH=/Users/alex/projects/svt/escenic/manage/src/main/resources/manage/lib/python:/Users/alex/projects/svt/escenic/manage/src/main/resources/manage/lib/python/manageutils-external:$PYTHONPATH
+# export ECE_CHECKOUT_ROOT=/Users/alex/projects/svt/escenic
+# export ECE_MANAGE_ROOT=/Users/alex/projects/svt/escenic/manage/src/main/resources/manage
+# export PATH=/Users/alex/projects/svt/escenic/manage/src/main/resources/manage/bin:$PATH
+# export PYTHONPATH=/Users/alex/projects/svt/escenic/manage/src/main/resources/manage/lib/python:/Users/alex/projects/svt/escenic/manage/src/main/resources/manage/lib/python/manageutils-external:$PYTHONPATH

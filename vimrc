@@ -208,6 +208,7 @@ if has("autocmd")
   autocmd BufNewFile,BufReadPost *.py setl shiftwidth=2 expandtab
   autocmd BufNewFile,BufReadPost *.go set filetype=go
   autocmd BufNewFile,BufReadPost *.go setl shiftwidth=2 expandtab
+  autocmd BufNewFile,BufReadPost *.erb set filetype=eruby
   " autocmd FileType go autocmd BufWritePre <buffer> Fmt
 endif
 
@@ -261,6 +262,9 @@ augroup END
 let g:NERDTreeHijackNetrw = 0
 
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
+" Ignore files in .gitignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " Alias commands
 command! W :w
