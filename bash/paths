@@ -5,16 +5,9 @@ export PATH=/usr/bin:/usr/sbin:$PATH
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=.:~/bin:~/sbin:$PATH
-export PATH=./node_modules/.bin:$PATH							# Add local node binarys
-export PATH=~/.rvm/bin:$PATH											# Add RVM to PATH for scripting
-export PATH=/usr/local/heroku/bin:$PATH						# Heroku Toolbelt   
 export PATH=/opt/local/lib/php/pear/bin:$PATH
 export PATH=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH
 export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
-
-export PATH=$HOME/.rbenv/bin:$PATH
-
-# export PATH=$PATH:~/.gem/ruby/1.8/bin
 
 # Man
 export MANPATH=/usr/local/man:/usr/local/mysql/man:$MANPATH
@@ -38,6 +31,9 @@ export MAVEN_M2=/opt/local/share/java/maven2
 # Jrebel
 # export JAVA_OPTS="-javaagent:/opt/svt/jrebel/jrebel.jar -DrebelProjectRoot=/Users/alex/projects/svt/escenic $JAVA_OPTS"
 
+# Ruby
+export PATH=$HOME/.rbenv/bin:$PATH
+export PATH=~/.rvm/bin:$PATH                      # Add RVM to PATH for scripting
 
 # Golang
 # export GOPATH=~/go;
@@ -49,3 +45,8 @@ export MAVEN_M2=/opt/local/share/java/maven2
 # export ECE_MANAGE_ROOT=/Users/alex/projects/svt/escenic/manage/src/main/resources/manage
 # export PATH=/Users/alex/projects/svt/escenic/manage/src/main/resources/manage/bin:$PATH
 # export PYTHONPATH=/Users/alex/projects/svt/escenic/manage/src/main/resources/manage/lib/python:/Users/alex/projects/svt/escenic/manage/src/main/resources/manage/lib/python/manageutils-external:$PYTHONPATH
+
+# Node
+export PATH=./node_modules/.bin:$PATH             # Add local node binarys
+
+

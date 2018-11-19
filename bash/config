@@ -65,3 +65,7 @@ export HISTSIZE=10000
 shopt -s histappend
 # append each line to the history individually
 export PROMPT_COMMAND="history -a"
+
+export POW_DOMAINS=dev,test
+
+export FONTAWSOME_NPM_TOKEN="missing auth token"
